@@ -6,6 +6,8 @@
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
+![alt text](https://drive.google.com/thumbnail?id=1NbC98nHMEt7wL9C50eEIbc5uI6L6zhbL)
+
 ## Getting Started
 
 Getting up and running is as easy as 1, 2, 3.
