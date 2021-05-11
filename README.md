@@ -10,10 +10,6 @@
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
-<p>
-  <a href="https://feathersjs.com/"><img src="https://doc-04-3s-docs.googleusercontent.com/docs/securesc/oh1c56fm75o6105vt21jast30hf8ujgm/rbc8pi1a656gsvdi1d8nv2prsosn8b3t/1620745950000/15601070927783896179/16030218320920563346/1NbC98nHMEt7wL9C50eEIbc5uI6L6zhbL?e=view&authuser=0&nonce=t3s1pb0blf308&user=16030218320920563346&hash=rgm9c60fsjfu9v0hpu9aru1lsaka8fh7" alt="Feathers JS" height="100%" width="100%"/></a>
-</p>
-
 ### Database
 
 MongoDB is used as the database for this project. To use your mongodb url you have to set it in you .env file in root directory of project.
