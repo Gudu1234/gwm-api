@@ -11,7 +11,7 @@
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
 <p>
-  <a href="https://feathersjs.com/"><img src=" https://drive.google.com/uc?export=view&id=1NbC98nHMEt7wL9C50eEIbc5uI6L6zhbL" alt="Feathers JS" height="100%" width="100%"/></a>
+  <a href="https://feathersjs.com/"><img src="https://drive.google.com/uc?export=view&id=1NbC98nHMEt7wL9C50eEIbc5uI6L6zhbL" alt="Feathers JS" height="100%" width="100%"/></a>
 </p>
 
 ### Database
