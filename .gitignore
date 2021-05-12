@@ -78,7 +78,6 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 .drivecredentials.json
-.env
 
 # Directories potentially created on remote AFP share
 .AppleDB
