@@ -3,7 +3,7 @@
 > Backend application of gwm-client project
 
 <p>
-  <a href="https://feathersjs.com/"><img src="https://drive.google.com/uc?export=view&id=1wGZtAFA5a0xbDax8HnqIVdYniMROhXwp" alt="GWM" height="100%" width="100%"/></a>
+  <a href="https://feathersjs.com/"><img src="https://drive.google.com/uc?export=view&id=1nc2O0Zwck5ffGrLYuIN0byELv6VUJ0ZM" alt="GWM" height="100%" width="100%"/></a>
 </p>
 
 ## About
