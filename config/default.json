@@ -28,5 +28,6 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "MONGO_URL"
+  "mongodb": "MONGO_URL",
+  "CREDENTIALS_PATH": "GOOGLE_APPLICATION_CREDENTIALS"
 }
