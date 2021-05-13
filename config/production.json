@@ -1,4 +1,4 @@
 {
-  "host": "gwm-api-app.feathersjs.com",
+  "host": "gwm-api-server.herokuapp.com/",
   "port": "PORT"
 }
