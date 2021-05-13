@@ -1,5 +1,4 @@
 {
-  "host": "gwm-api-server.herokuapp.com/",
-  "port": "PORT",
-  "frontend": "./public/dist"
+  "host": "gwm-api-server.herokuapp.com",
+  "port": "PORT"
 }
