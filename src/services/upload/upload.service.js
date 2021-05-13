@@ -73,7 +73,10 @@ export default function (app) {
                     })
                     .then((res) => res.data.storageQuota);
 
-                const { limit: storageLimit, usage: storageUsage } = storage;
+                const { limit, usage } = storage;
+
+                const storageLimit = parseInt(limit);
+                const storageUsage = parseInt(usage);
 
                 for (const file of files) {
                     const { size } = file;
