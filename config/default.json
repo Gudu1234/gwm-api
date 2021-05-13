@@ -28,5 +28,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb+srv://gwm:Gwm@123@gwm.nf7or.mongodb.net/gwm"
+  "mongodb": "MONGO_URL"
 }

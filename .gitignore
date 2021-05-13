@@ -112,5 +112,6 @@ lib/
 data/
 
 .env
+drivecredentials.json
 
 .vercel
