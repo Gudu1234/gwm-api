@@ -28,7 +28,7 @@
         "test": "yarn run lint && yarn run jest",
         "lint": "eslint src/. test/. --config .eslintrc.json --fix",
         "dev": "nodemon src/ --exec babel-node",
-        "start": "NODE_ENV=production babel-node src/",
+        "start": "yarn && babel-node src/",
         "jest": "jest  --forceExit"
     },
     "standard": {
@@ -74,10 +74,5 @@
         "jest": "^26.6.3",
         "nodemon": "^2.0.4",
         "prettier": "^2.0.5"
-    },
-    "husky1": {
-        "hooks": {
-            "pre-commit": "yarn eslint"
-        }
     }
 }
