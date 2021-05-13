@@ -23,7 +23,7 @@ export default function (app) {
      */
     const CREDENTIALS_PATH = app.get('CREDENTIALS_PATH');
 
-    console.log(CREDENTIALS_PATH);
+    // console.log(CREDENTIALS_PATH);
     let storage = multer.memoryStorage();
     let upload = multer({ storage: storage });
 
