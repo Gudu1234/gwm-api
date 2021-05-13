@@ -14,11 +14,8 @@ import appHooks from './app.hooks';
 import channels from './channels';
 import authentication from './authentication';
 import mongoose from './mongoose';
-import * as dotenv from 'dotenv';
 
 const app = express(feathers());
-
-dotenv.config();
 
 // Load app configuration
 app.configure(configuration());

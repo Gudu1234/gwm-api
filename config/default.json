@@ -21,12 +21,12 @@
       "audience": "https://yourdomain.com",
       "issuer": "feathers",
       "algorithm": "HS256",
-      "expiresIn": "1d"
+      "expiresIn": "365d"
     },
     "local": {
       "usernameField": "email",
       "passwordField": "password"
     }
   },
-  "mongodb": "MONGO_URL"
+  "mongodb": "mongodb+srv://gwm:Gwm@123@gwm.nf7or.mongodb.net/gwm"
 }
