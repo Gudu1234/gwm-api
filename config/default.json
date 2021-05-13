@@ -21,12 +21,13 @@
       "audience": "https://yourdomain.com",
       "issuer": "feathers",
       "algorithm": "HS256",
-      "expiresIn": "1d"
+      "expiresIn": "365d"
     },
     "local": {
       "usernameField": "email",
       "passwordField": "password"
     }
   },
-  "mongodb": "MONGO_URL"
+  "mongodb": "MONGO_URL",
+  "CREDENTIALS_PATH": "GOOGLE_APPLICATION_CREDENTIALS"
 }

@@ -16,9 +16,9 @@ import authentication from './authentication';
 import mongoose from './mongoose';
 import * as dotenv from 'dotenv';
 
-const app = express(feathers());
-
 dotenv.config();
+
+const app = express(feathers());
 
 // Load app configuration
 app.configure(configuration());
