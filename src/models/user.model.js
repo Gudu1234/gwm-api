@@ -5,10 +5,103 @@
 export default function (app) {
     const modelName = 'users';
     const mongooseClient = app.get('mongooseClient');
-    const schema = new mongooseClient.Schema(
+    const { Schema } = mongooseClient;
+    const { ObjectId } = Schema.Types;
+    const schema = new Schema(
         {
-            email: { type: String, unique: true, lowercase: true },
-            password: { type: String },
+            name: {
+                type: String,
+                required: true,
+            },
+            phone: {
+                type: String,
+                required: true,
+            },
+            email: {
+                type: String,
+                required: true,
+            },
+            username: {
+                type: String,
+                required: true,
+            },
+            password: {
+                type: String,
+                required: true,
+            },
+            avatar: {
+                type: String,
+                required: true,
+            },
+            address: {
+                type: {
+                    addressLine: {
+                        type: String,
+                    },
+                    street: {
+                        type: String,
+                    },
+                    landmark: {
+                        type: String,
+                    },
+                    pinCode: {
+                        type: String,
+                    },
+                },
+                default: null,
+            },
+            zone: {
+                type: ObjectId,
+                ref: 'zone',
+                default: null,
+            },
+            role: {
+                type: Number,
+                enum: [
+                    1, // cleaner
+                    2, // driver
+                    3, // admin
+                    4, // system-admin
+                ],
+                required: true,
+            },
+            status: {
+                type: Number,
+                enum: [
+                    1, // active
+                    2, // blocked
+                    0, // deleted
+                ],
+                default: 1,
+            },
+            userStatus: {
+                type: Number,
+                enum: [
+                    1, // present
+                    2, // absent
+                ],
+                default: 1,
+            },
+            userWorkType: {
+                type: Number,
+                enum: [
+                    1, // cleaning task
+                    2, // disposal task
+                    3, // helping task
+                ],
+            },
+            gender: {
+                type: Number,
+                enum: [
+                    1, // male
+                    2, // female
+                    3, // others
+                ],
+            },
+            fcmId: {
+                type: String,
+                default: '',
+            },
         },
         {
             timestamps: true,
