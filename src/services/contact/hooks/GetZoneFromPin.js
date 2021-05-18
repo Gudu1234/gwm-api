@@ -15,7 +15,7 @@ const GetZoneFromPin = () => async (context) => {
                 pinCodes: { $in: [pinCode] },
             },
         })
-        .then((res) => (res.total ? res.data[0] : null));
+        .then((res) => (res.length ? res[0] : null));
 
     if (!zone) throw new BadRequest('Invalid Pin.');
 

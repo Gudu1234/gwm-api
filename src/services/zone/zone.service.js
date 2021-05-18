@@ -7,7 +7,6 @@ import hooks from './zone.hooks';
 export default function (app) {
     const options = {
         Model: createModel(app),
-        paginate: app.get('paginate'),
     };
 
     // Initialize our service with any options it requires
