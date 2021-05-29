@@ -3,13 +3,17 @@
  */
 
 const SetZone = () => async (context) => {
-    const { params, data } = context;
+    const { params, data, method } = context;
 
     const {
         user: { zone },
     } = params;
 
-    data.zone = zone;
+    if (method === 'create') {
+        data.zone = zone;
+    } else if (method === 'find') {
+        params.query.zone = zone;
+    }
 };
 
 export default SetZone;

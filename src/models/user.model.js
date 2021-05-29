@@ -37,15 +37,18 @@ export default function (app) {
                 type: {
                     addressLine: {
                         type: String,
+                        required: true,
                     },
                     street: {
                         type: String,
+                        required: true,
                     },
                     landmark: {
                         type: String,
                     },
                     pinCode: {
                         type: String,
+                        required: true,
                     },
                 },
                 default: null,
