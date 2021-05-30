@@ -21,6 +21,10 @@ export default function (app) {
                 type: String,
                 required: true,
             },
+            reqId: {
+                type: String,
+                required: true,
+            },
             pinCode: {
                 type: String,
                 required: true,

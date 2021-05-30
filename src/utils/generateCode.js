@@ -4,7 +4,8 @@
  */
 import { customAlphabet } from 'nanoid';
 
-const generateCode = async (app, serviceName, queryParam, digit) => {
+const generateCode = (serviceName, queryParam, digit, prefix) => async (context) => {
+    const { app } = context;
     let code;
     let codeExists = true;
 
@@ -16,7 +17,7 @@ const generateCode = async (app, serviceName, queryParam, digit) => {
         let nanoid = customAlphabet('123456789', digit);
         code = nanoid();
 
-        query[`${queryParam}`] = code;
+        query[`${queryParam}`] = `${prefix}${code}`;
 
         codeExists = await service
             ._find({
@@ -25,7 +26,9 @@ const generateCode = async (app, serviceName, queryParam, digit) => {
             .then((res) => !!res.total);
     }
 
-    return code;
+    context.data[`${queryParam}`] = `${prefix}${code}`;
+
+    return context;
 };
 
 export default generateCode;
