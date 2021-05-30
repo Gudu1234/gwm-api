@@ -1,7 +1,7 @@
 import * as feathersAuth from '@feathersjs/authentication';
 import * as local from '@feathersjs/authentication-local';
 import FRequired from '../../hooks/FRequired';
-import {disallow, discard, iff, isProvider} from 'feathers-hooks-common';
+import { disallow, discard, iff, isProvider } from 'feathers-hooks-common';
 import CheckEmailOrPhoneOrUsername from '../../hooks/CheckEmailOrPhoneOrUsername';
 import HasData from '../../utils/HasData';
 import Permit from '../../hooks/Permit';
@@ -12,6 +12,7 @@ import CheckForUser from './hooks/CheckForUser';
 import patchDeleted from '../../hooks/patchDeleted';
 import IsUser from '../../utils/IsUser';
 import setId from '../../hooks/setId';
+import search from 'feathers-mongodb-fuzzy-search';
 
 const { authenticate } = feathersAuth.hooks;
 const { hashPassword, protect } = local.hooks;
@@ -19,7 +20,14 @@ const { hashPassword, protect } = local.hooks;
 export default {
     before: {
         all: [],
-        find: [authenticate('jwt'), setDefaultQuery('status', 1), iff(isProvider('external'), SetZone())],
+        find: [
+            authenticate('jwt'),
+            setDefaultQuery('status', 1),
+            iff(isProvider('external'), SetZone()),
+            search({
+                fields: ['name', 'username', 'phone', 'address.street'],
+            }),
+        ],
         get: [authenticate('jwt'), setDefaultQuery('status', 1)],
         create: [
             hashPassword('password'),
