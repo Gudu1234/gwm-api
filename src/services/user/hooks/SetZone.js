@@ -11,7 +11,7 @@ const SetZone = () => async (context) => {
 
     if (method === 'create') {
         data.zone = zone;
-    } else if (method === 'find') {
+    } else {
         params.query.zone = zone;
     }
 };
