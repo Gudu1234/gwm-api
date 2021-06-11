@@ -9,6 +9,7 @@ import setDefaultQuery from '../../hooks/setDefaultQuery';
 import HasQuery from '../../utils/HasQuery';
 import GetZoneFromPin from './hooks/GetZoneFromPin';
 import FRequiredQuery from '../../hooks/FRequiredQuery';
+import search from 'feathers-mongodb-fuzzy-search';
 
 const { authenticate } = feathersAuthentication.hooks;
 
@@ -22,6 +23,9 @@ export default {
             iff(IsUser('admin'), setZoneQuery()),
             setDefaultQuery('status', { $ne: 0 }),
             iff(HasQuery('status', 2), setDefaultQuery('$sort', { updatedAt: -1 })),
+            search({
+                fields: ['name', 'pinCode', 'phone'],
+            }),
         ],
         get: [],
         create: [FRequired(['name', 'phone', 'pinCode', 'feedbackType', 'message']), GetZoneFromPin()],

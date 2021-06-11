@@ -13,7 +13,7 @@ const setCreatedBy =
     (context) => {
         const { params } = context;
         if (!params.user) return context;
-        const fieldNames = _fieldNames.length ? _fieldNames : ['user'];
+        const fieldNames = _fieldNames.length ? _fieldNames : ['createdBy'];
         // if (typeof fieldNames === 'string') context.data[fieldNames] = params.user._id;
         if (Array.isArray(fieldNames))
             fieldNames.map((each) => {
