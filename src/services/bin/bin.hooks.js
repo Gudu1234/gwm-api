@@ -8,19 +8,28 @@ import { disallow, discard, iff } from 'feathers-hooks-common';
 import generateCode from '../../utils/generateCode';
 import patchDeleted from '../../hooks/patchDeleted';
 import setDefaultQuery from '../../hooks/setDefaultQuery';
+import search from 'feathers-mongodb-fuzzy-search';
+import CheckNullQuery from '../../hooks/CheckNullQuery';
 
 const { authenticate } = feathersAuthentication.hooks;
 
 export default {
     before: {
         all: [authenticate('jwt')],
-        find: [setDefaultQuery('status', { $ne: 0 }), SetZone()],
+        find: [
+            setDefaultQuery('status', { $ne: 0 }),
+            SetZone(),
+            CheckNullQuery('worker'),
+            search({
+                fields: ['binId', 'address', 'street', 'landmark', 'pinCode'],
+            }),
+        ],
         get: [],
         create: [
             Permit('admin'),
             SetZone(),
             setCreatedBy(),
-            FRequired(['pinCode', 'mapLink', 'address', 'street', 'landmark', 'type', 'coordinates']),
+            FRequired(['pinCode', 'address', 'street', 'landmark', 'type', 'coordinates']),
             iff(HasData('type', 2), FRequired(['parent'])),
             generateCode('bin', 'binId', 6, 'GBIN'),
         ],

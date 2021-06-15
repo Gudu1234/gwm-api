@@ -3,7 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 export default function (app) {
-    const modelName = 'users';
+    const modelName = 'user';
     const mongooseClient = app.get('mongooseClient');
     const { Schema } = mongooseClient;
     const { ObjectId } = Schema.Types;

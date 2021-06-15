@@ -16,6 +16,10 @@ export default function (app) {
                 type: [String],
                 required: true,
             },
+            landmarks: {
+                type: [String],
+                required: true,
+            },
             status: {
                 type: Number,
                 enum: [

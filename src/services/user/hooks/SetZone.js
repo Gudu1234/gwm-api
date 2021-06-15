@@ -1,6 +1,7 @@
 /**
  * Created by Soumya (soumya@smarttersstudio.com) on 17/05/21 at 4:41 PM.
  */
+import { BadRequest } from '@feathersjs/errors';
 
 const SetZone = () => async (context) => {
     const { params, data, method } = context;
@@ -10,9 +11,14 @@ const SetZone = () => async (context) => {
     } = params;
 
     if (method === 'create') {
-        data.zone = zone;
+        if (zone) {
+            data.zone = zone;
+        }
+        if (!data.zone) throw new BadRequest('Select your zone.');
     } else {
-        params.query.zone = zone;
+        if (zone) {
+            params.query.zone = zone;
+        }
     }
 };
 

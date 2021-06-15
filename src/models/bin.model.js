@@ -29,11 +29,10 @@ export default function (app) {
             },
             mapLink: {
                 type: String,
-                required: true,
+                // required: true,
             },
             address: {
                 type: String,
-                required: true,
             },
             street: {
                 type: String,
@@ -54,7 +53,6 @@ export default function (app) {
             parent: {
                 type: ObjectId,
                 ref: 'bin',
-                required: true,
             },
             coordinates: {
                 type: [Number],
