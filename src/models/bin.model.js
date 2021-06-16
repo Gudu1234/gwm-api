@@ -78,6 +78,10 @@ export default function (app) {
         },
     );
 
+    schema.index({
+        coordinates: '2dsphere',
+    });
+
     // This is necessary to avoid model compilation errors in watch mode
     // see https://mongoosejs.com/docs/api/connection.html#connection_Connection-deleteModel
     if (mongooseClient.modelNames().includes(modelName)) {

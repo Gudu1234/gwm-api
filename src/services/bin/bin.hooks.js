@@ -19,7 +19,7 @@ export default {
         find: [
             setDefaultQuery('status', { $ne: 0 }),
             SetZone(),
-            CheckNullQuery('worker'),
+            CheckNullQuery(['worker', 'parent']),
             search({
                 fields: ['binId', 'address', 'street', 'landmark', 'pinCode'],
             }),

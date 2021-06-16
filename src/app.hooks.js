@@ -1,9 +1,23 @@
 // Application hooks that run for every service
 
+import { iff, isProvider } from 'feathers-hooks-common';
+
 export default {
     before: {
         all: [],
-        find: [],
+        find: [
+            iff(isProvider('external'), (ctx) => {
+                const { params } = ctx;
+                let {
+                    query: { $limit },
+                } = params;
+                if (typeof $limit === 'string') $limit = parseInt($limit);
+                if ($limit === -1) {
+                    delete ctx.params.query.$limit;
+                    ctx.params.paginate = false;
+                }
+            }),
+        ],
         get: [],
         create: [],
         update: [],
