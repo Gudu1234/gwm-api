@@ -29,11 +29,10 @@ export default function (app) {
             },
             mapLink: {
                 type: String,
-                required: true,
+                // required: true,
             },
             address: {
                 type: String,
-                required: true,
             },
             street: {
                 type: String,
@@ -54,7 +53,6 @@ export default function (app) {
             parent: {
                 type: ObjectId,
                 ref: 'bin',
-                required: true,
             },
             coordinates: {
                 type: [Number],
@@ -79,6 +77,10 @@ export default function (app) {
             timestamps: true,
         },
     );
+
+    schema.index({
+        coordinates: '2dsphere',
+    });
 
     // This is necessary to avoid model compilation errors in watch mode
     // see https://mongoosejs.com/docs/api/connection.html#connection_Connection-deleteModel

@@ -13,6 +13,7 @@ import patchDeleted from '../../hooks/patchDeleted';
 import IsUser from '../../utils/IsUser';
 import setId from '../../hooks/setId';
 import search from 'feathers-mongodb-fuzzy-search';
+import generateCode from '../../utils/generateCode';
 
 const { authenticate } = feathersAuth.hooks;
 const { hashPassword, protect } = local.hooks;
@@ -31,7 +32,7 @@ export default {
         get: [authenticate('jwt'), setDefaultQuery('status', 1)],
         create: [
             hashPassword('password'),
-            FRequired(['name', 'email', 'phone', 'username', 'password', 'role', 'avatar', 'address']),
+            FRequired(['name', 'email', 'phone', 'password', 'role', 'avatar', 'address']),
             iff(HasData('role', 1, 2), authenticate('jwt'), Permit('admin'), SetZone()),
             iff(
                 HasData('role', 3),
@@ -43,6 +44,9 @@ export default {
             iff(HasData('role', 4), disallow()),
             CheckEmailOrPhoneOrUsername(),
             discard('status'),
+            iff(HasData('role', 1), generateCode('user', 'username', 4, 'GWMC')),
+            iff(HasData('role', 2), generateCode('user', 'username', 4, 'GWMD')),
+            iff(HasData('role', 3), generateCode('user', 'username', 4, 'GWMA')),
         ],
         update: [disallow()],
         patch: [

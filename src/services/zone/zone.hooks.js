@@ -13,8 +13,8 @@ export default {
         get: [disallow()],
         create: [authenticate('jwt'), Permit('system-admin')],
         update: [disallow()],
-        patch: [Permit('system-admin')],
-        remove: [Permit('system-admin'), patchDeleted()],
+        patch: [authenticate('jwt'), Permit('system-admin')],
+        remove: [authenticate('jwt'), Permit('system-admin'), patchDeleted()],
     },
 
     after: {
