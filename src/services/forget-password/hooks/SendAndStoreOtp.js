@@ -7,8 +7,6 @@ const SendAndStoreOTP = () => async (context) => {
 
     const { email, user } = data;
 
-    const RedisClient = app.get('RedisClient');
-
     /**
      * @type {Utils}
      */
@@ -23,9 +21,19 @@ const SendAndStoreOTP = () => async (context) => {
         passwordResetTokenExpiry: utils.newOTPExpireOn,
     });
 
-    const storedData = await RedisClient.getAsync(`otp:${email}`);
+    const storedData = await app
+        .service('otp-send')
+        ._find({
+            query: {
+                email,
+                $sort: {
+                    createdAt: -1,
+                },
+            },
+        })
+        .then((res) => (res.total ? res.data[0] : null));
 
-    const { otp, expireOn } = storedData ? JSON.parse(storedData) : {};
+    const { otp, expireOn } = storedData ? storedData : {};
 
     if (otp && expireOn && utils.isOTPExpired(expireOn)) {
         await utils.sendMail(
@@ -38,7 +46,11 @@ const SendAndStoreOTP = () => async (context) => {
     } else {
         const otp = utils.newOtp;
 
-        utils.setNewOTPtoRedis(email, otp);
+        await app.service('otp-send')._create({
+            email,
+            otp,
+            expireOn: utils.newOTPExpireOn,
+        });
 
         await utils.sendMail(
             email,
