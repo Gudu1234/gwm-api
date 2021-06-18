@@ -29,5 +29,22 @@
     }
   },
   "mongodb": "MONGO_URL",
-  "CREDENTIALS_PATH": "GOOGLE_APPLICATION_CREDENTIALS"
+  "CREDENTIALS_PATH": "GOOGLE_APPLICATION_CREDENTIALS",
+  "mail": "MAIL_ID",
+  "redis": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "localDb": "d9",
+      "globalDb": "d0"
+  },
+  "otp": {
+      "length": 6,
+      "expireOn": 10,
+      "viewLog": true
+  },
+  "google": {
+      "appId": "GOOGLE_CLIENT_ID",
+      "appSecret": "GOOGLE_CLIENT_SECRET",
+      "refreshToken": "REFRESH_TOKEN"
+  }
 }

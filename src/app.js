@@ -15,6 +15,9 @@ import channels from './channels';
 import authentication from './authentication';
 import mongoose from './mongoose';
 import * as dotenv from 'dotenv';
+import redis from './redis';
+import utils from './utils';
+import oauth from './oauth';
 
 dotenv.config();
 
@@ -41,6 +44,9 @@ app.configure(express.rest());
 app.configure(socketio());
 
 app.configure(mongoose);
+app.configure(redis);
+app.configure(oauth);
+app.configure(utils);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

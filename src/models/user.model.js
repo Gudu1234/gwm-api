@@ -105,6 +105,12 @@ export default function (app) {
                 type: String,
                 default: '',
             },
+            passwordResetToken: {
+                type: String,
+            },
+            passwordResetTokenExpiry: {
+                type: Date,
+            },
         },
         {
             timestamps: true,

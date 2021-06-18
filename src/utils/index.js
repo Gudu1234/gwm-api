@@ -17,8 +17,6 @@ export class Utils {
         };
 
         this._app = app;
-
-        this._transporter = nodeMailer.createTransport(this.app.get('mail'));
     }
 
     /**
@@ -176,50 +174,44 @@ export class Utils {
 
     /**
      *
-     * @param message {String}
-     * @param toUsers {String[]|String}
-     * @returns {Promise<AxiosResponse<T>>}
-     */
-    sendSMS(message, toUsers) {
-        const sms = this.config.sms;
-        let to = [];
-        if (Array.isArray(toUsers)) {
-            to = toUsers;
-        } else {
-            to.push(toUsers);
-        }
-        // console.log(sms);
-        return Axios.post(
-            sms.url,
-            {
-                sender: sms.sender,
-                route: '4',
-                country: '91',
-                sms: [{ message, to }],
-            },
-            {
-                headers: {
-                    authkey: sms.authkey,
-                    'content-type': 'application/json',
-                },
-            },
-        ); //.catch(console.error);
-    }
-
-    /**
-     *
      * @param emails {String[]|String}
      * @param subject {String}
      * @param message {String}
      * @param from {String}
      * @returns {Promise<unknown>|Promise<unknown>[]}
      */
-    async sendMail(emails, subject, message, from = 'fitwallet@smarttersstudio.com') {
+    async sendMail(emails, subject, message, from = 'gwmsystem2021@gmail.com') {
         if (Array.isArray(emails)) {
             return emails.map((each) => this.sendMail(each, subject, message, from));
         } else {
-            return new Promise((resolve, reject) => {
-                this._transporter.sendMail(
+            return new Promise(async (resolve, reject) => {
+                const { appId, appSecret, refreshToken } = this._app.get('google');
+                const mail = this._app.get('mail');
+                const config = {
+                    method: 'post',
+                    url: `https://oauth2.googleapis.com/token?client_id=${appId}&client_secret=${appSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`,
+                };
+                const accessToken = await Axios(config).then((res) => res.access_token);
+                let transporter;
+                try {
+                    transporter = nodeMailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            type: 'OAuth2',
+                            user: mail,
+                            clientId: appId,
+                            clientSecret: appSecret,
+                            refreshToken: refreshToken,
+                            accessToken: accessToken,
+                        },
+                        tls: {
+                            rejectUnauthorized: false,
+                        },
+                    });
+                } catch (e) {
+                    // console.log(e);
+                }
+                transporter.sendMail(
                     {
                         from, // sender address
                         to: emails, // list of receivers
@@ -227,7 +219,10 @@ export class Utils {
                         text: message, //
                     },
                     (error, info) => {
-                        if (error) return reject(error);
+                        if (error) {
+                            console.log(error);
+                            return reject(error);
+                        }
                         return resolve(info);
                     },
                 );
