@@ -90,11 +90,22 @@ export class Utils {
     /**
      *
      * @returns {void | boolean | request.Request | Objection.QueryBuilderYieldingCount<Objection.Model, any> | Knex.QueryBuilder<any, DeferredKeySelection<any, never>[]> | Knex.QueryBuilder<any, DeferredIndex.Augment<UnwrapArrayMember<any[]>, any, TKey>[]> | Knex.QueryBuilder<any, DeferredKeySelection.Augment<UnwrapArrayMember<any[]>, any, TKey>[][]> | Knex.QueryBuilder<any, SafePartial<any>[]> | Knex.QueryBuilder<any, number>}
-     * @param phone
+     * @param email
      */
-    removeOTPFromRedis(phone) {
-        const RedisClient = this.app.get('RedisClient');
-        return RedisClient.del('otp:' + phone);
+    async removeOTPFromRedis(email) {
+        // const RedisClient = this.app.get('RedisClient');
+        // return RedisClient.del('otp:' + phone);
+        const storedData = await this._app
+            .service('otp-send')
+            ._find({
+                query: {
+                    email,
+                },
+            })
+            .then((res) => (res.total ? res.data[0] : null));
+        if (storedData) {
+            await this._app.service('otp-send')._remove(storedData._id);
+        }
     }
 
     /**
@@ -109,37 +120,39 @@ export class Utils {
 
     /**
      *
-     * @param phone
+     * @param email
      * @param otp {Number}
-     * @returns {Promise<T>}
+     * @returns {Promise<{status: boolean}>}
      */
-    async verifyOtp(phone, otp) {
-        return new Promise((resolve) => {
-            const RedisClient = this.app.get('RedisClient');
+    async verifyOtp(email, otp) {
+        const storedData = await this._app
+            .service('otp-send')
+            ._find({
+                query: {
+                    email,
+                    otp,
+                },
+            })
+            .then((res) => (res.total ? res.data[0] : null));
 
-            return RedisClient.getAsync('otp:' + phone)
-                .then((result) => {
-                    const data = JSON.parse(result);
-
-                    if (data) {
-                        if (Number(otp) === data.otp) {
-                            if (!moment().isSameOrBefore(moment(data.expireOn))) {
-                                this.removeOTPFromRedis(phone);
-                                resolve({ status: false, message: 'OTP has expired!' });
-                            } else {
-                                resolve({ status: true });
-                            }
-                        } else {
-                            resolve({ status: false, message: 'OTP is invalid!' });
-                        }
-                    } else {
-                        resolve({ status: false, message: 'OTP is invalid!' });
-                    }
-                })
-                .catch(() => {
-                    resolve({ status: false, message: 'OTP is invalid!' });
-                });
-        });
+        if (!storedData) {
+            return {
+                status: false,
+                message: 'Invalid otp.',
+            };
+        }
+        const { expireOn, _id: storedId } = storedData;
+        if (!moment().isSameOrBefore(moment(expireOn))) {
+            await this._app.service('otp-send')._remove(storedId);
+            return {
+                status: false,
+                message: 'OTP is expired.',
+            };
+        } else {
+            return {
+                status: true,
+            };
+        }
     }
 
     /**
