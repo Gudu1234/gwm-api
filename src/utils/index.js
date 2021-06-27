@@ -204,7 +204,11 @@ export class Utils {
                     method: 'post',
                     url: `https://oauth2.googleapis.com/token?client_id=${appId}&client_secret=${appSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`,
                 };
-                const accessToken = await Axios(config).then((res) => res.access_token);
+                const accessToken = await Axios(config)
+                    .then((res) => res.access_token)
+                    .catch((e) => {
+                        console.log(e);
+                    });
                 let transporter;
                 try {
                     transporter = nodeMailer.createTransport({
