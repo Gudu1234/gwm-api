@@ -60,6 +60,7 @@ export default function (app) {
                 enum: [
                     1, // active
                     2, // resolved
+                    3, // inspected
                     0, // removed
                 ],
                 default: 1,

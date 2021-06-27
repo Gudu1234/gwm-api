@@ -3,6 +3,7 @@ import { Request } from './request.class';
 
 import createModel from '../../models/request.model';
 import hooks from './request.hooks';
+import OnRequestCreated from './events/OnRequestCreated';
 
 export default function (app) {
     const options = {
@@ -18,4 +19,7 @@ export default function (app) {
     const service = app.service('request');
 
     service.hooks(hooks);
+
+    service.on('created', OnRequestCreated);
+    service.on('patched', OnRequestCreated);
 }

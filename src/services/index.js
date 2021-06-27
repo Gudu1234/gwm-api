@@ -10,6 +10,7 @@ import forgetPassword from './forget-password/forget-password.service';
 import verifyPasswordOtp from './verify-password-otp/verify-password-otp.service';
 import resetPassword from './reset-password/reset-password.service';
 import otpSend from './otp-send/otp-send.service';
+import task from './task/task.service';
 
 // eslint-disable-next-line no-unused-vars
 export default function (app) {
@@ -25,4 +26,5 @@ export default function (app) {
     app.configure(verifyPasswordOtp);
     app.configure(resetPassword);
     app.configure(otpSend);
+    app.configure(task);
 }
