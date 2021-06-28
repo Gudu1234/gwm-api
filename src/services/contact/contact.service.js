@@ -3,6 +3,7 @@ import { Contact } from './contact.class';
 
 import createModel from '../../models/contact.model';
 import hooks from './contact.hooks';
+import OnComplaintResolved from './events/OnComplaintResolved';
 
 export default function (app) {
     const options = {
@@ -18,4 +19,6 @@ export default function (app) {
     const service = app.service('contact');
 
     service.hooks(hooks);
+
+    service.on('patched', OnComplaintResolved);
 }
