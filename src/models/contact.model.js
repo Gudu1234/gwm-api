@@ -17,6 +17,10 @@ export default function (app) {
                 type: String,
                 required: true,
             },
+            email: {
+                type: String,
+                required: true,
+            },
             pinCode: {
                 type: String,
                 required: true,
