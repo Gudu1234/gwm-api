@@ -12,6 +12,8 @@ import resetPassword from './reset-password/reset-password.service';
 import otpSend from './otp-send/otp-send.service';
 import task from './task/task.service';
 
+import custom from './custom/custom.service';
+
 // eslint-disable-next-line no-unused-vars
 export default function (app) {
     app.configure(user);
@@ -27,4 +29,6 @@ export default function (app) {
     app.configure(resetPassword);
     app.configure(otpSend);
     app.configure(task);
+
+    app.configure(custom);
 }

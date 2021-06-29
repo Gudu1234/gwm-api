@@ -63,6 +63,9 @@ export default function (app) {
                 ref: 'user',
                 default: null,
             },
+            workerAssignedOn: {
+                type: Date,
+            },
             status: {
                 type: Number,
                 enum: [

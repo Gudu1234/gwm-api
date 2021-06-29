@@ -206,8 +206,9 @@ export class Utils {
                 };
                 const accessToken = await Axios(config)
                     .then((res) => res.access_token)
+                    // eslint-disable-next-line no-unused-vars
                     .catch((e) => {
-                        console.log(e);
+                        // console.log(e);
                     });
                 let transporter;
                 try {
@@ -237,7 +238,7 @@ export class Utils {
                     },
                     (error, info) => {
                         if (error) {
-                            console.log(error);
+                            // console.log(error);
                             return reject(error);
                         }
                         return resolve(info);
