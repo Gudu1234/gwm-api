@@ -10,6 +10,8 @@ import patchDeleted from '../../hooks/patchDeleted';
 import setDefaultQuery from '../../hooks/setDefaultQuery';
 import search from 'feathers-mongodb-fuzzy-search';
 import CheckNullQuery from '../../hooks/CheckNullQuery';
+import HasDataExists from '../../utils/HasDataExists';
+import SetCurrentTime from '../../hooks/SetCurrentTime';
 
 const { authenticate } = feathersAuthentication.hooks;
 
@@ -32,9 +34,15 @@ export default {
             FRequired(['pinCode', 'address', 'street', 'landmark', 'type', 'coordinates']),
             iff(HasData('type', 2), FRequired(['parent'])),
             generateCode('bin', 'binId', 6, 'GBIN'),
+            iff(HasDataExists('worker'), SetCurrentTime('workerAssignedOn')),
         ],
         update: [disallow()],
-        patch: [Permit('admin'), SetZone(), discard('binId')],
+        patch: [
+            Permit('admin'),
+            SetZone(),
+            discard('binId'),
+            iff(HasDataExists('worker'), SetCurrentTime('workerAssignedOn')),
+        ],
         remove: [Permit('admin'), patchDeleted()],
     },
 
