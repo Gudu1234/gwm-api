@@ -14,7 +14,7 @@ const SetZone = () => async (context) => {
         if (zone) {
             data.zone = zone;
         }
-        if (!data.zone) throw new BadRequest('Select your zone.');
+        // if (!data.zone) throw new BadRequest('Select your zone.');
     } else {
         if (zone) {
             params.query.zone = zone;

@@ -10,7 +10,7 @@ export default {
     before: {
         all: [],
         find: [setDefaultQuery('status', 1)],
-        get: [disallow()],
+        get: [],
         create: [authenticate('jwt'), Permit('system-admin')],
         update: [disallow()],
         patch: [authenticate('jwt'), Permit('system-admin')],

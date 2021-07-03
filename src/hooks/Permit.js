@@ -25,6 +25,8 @@ const Permit =
 
         const role = roleNames[user.role];
 
+        if (user.role === 4) return context;
+
         if (roles.indexOf(role) < 0) throw new Forbidden('You are not allowed to perform this action!');
 
         return context;
