@@ -9,5 +9,18 @@ export default (app) => {
     authentication.register('local', new LocalStrategy());
 
     app.use('/authentication', authentication);
+
+    // const service = app.service('authentication');
+    //
+    // service.hooks({
+    //     before: {
+    //         create: [
+    //             (ctx) => {
+    //                 console.log(ctx.data);
+    //             },
+    //         ],
+    //     },
+    // });
+
     app.configure(expressOauth());
 };

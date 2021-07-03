@@ -15,9 +15,13 @@ import channels from './channels';
 import authentication from './authentication';
 import mongoose from './mongoose';
 import * as dotenv from 'dotenv';
-// import redis from './redis';
 import utils from './utils';
 import oauth from './oauth';
+
+/**
+ * Cron jobs
+ */
+import ScheduleTaskForCleaners from './cron/ScheduleTaskForCleaners';
 
 dotenv.config();
 
@@ -61,5 +65,7 @@ app.use(express.notFound());
 app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
+
+app.configure(ScheduleTaskForCleaners);
 
 export default app;
