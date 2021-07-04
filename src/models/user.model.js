@@ -111,6 +111,12 @@ export default function (app) {
             passwordResetTokenExpiry: {
                 type: Date,
             },
+            coordinates: {
+                type: [Number],
+            },
+            coordinatesUpdatedAt: {
+                type: Date,
+            },
         },
         {
             timestamps: true,
