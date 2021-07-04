@@ -14,6 +14,9 @@ import IsUser from '../../utils/IsUser';
 import setId from '../../hooks/setId';
 import search from 'feathers-mongodb-fuzzy-search';
 import generateCode from '../../utils/generateCode';
+import HasDataExists from '../../utils/HasDataExists';
+import SetCurrentTime from '../../hooks/SetCurrentTime';
+import CheckNullQuery from "../../hooks/CheckNullQuery";
 
 const { authenticate } = feathersAuth.hooks;
 const { hashPassword, protect } = local.hooks;
@@ -25,6 +28,7 @@ export default {
             authenticate('jwt'),
             setDefaultQuery('status', 1),
             iff(isProvider('external'), SetZone()),
+            CheckNullQuery('coordinatesUpdatedAt'),
             search({
                 fields: ['name', 'username', 'phone', 'address.street'],
             }),
@@ -55,6 +59,7 @@ export default {
             discard('role'),
             iff(IsUser('cleaner', 'driver'), setId(), discard('zone', 'status', 'userStatus', 'userWorkType')),
             iff(IsUser('admin'), CheckForUser()),
+            iff(HasDataExists('coordinates'), SetCurrentTime('coordinatesUpdatedAt')),
         ],
         remove: [authenticate('jwt'), Permit('admin', 'system-admin'), CheckForUser(), patchDeleted()],
     },
