@@ -5,6 +5,7 @@ import setCreatedByQuery from '../../hooks/setCreatedByQuery';
 import Permit from '../../hooks/Permit';
 import patchDeleted from '../../hooks/patchDeleted';
 import setDefaultQuery from '../../hooks/setDefaultQuery';
+import CheckRequestAlreadyExist from './hooks/CheckRequestAlreadyExist';
 
 const { authenticate } = feathersAuthentication.hooks;
 
@@ -13,7 +14,7 @@ export default {
         all: [authenticate('jwt')],
         find: [setDefaultQuery('status', { $ne: 0 }), iff(IsUser('cleaner', 'driver'), setCreatedByQuery('worker'))],
         get: [disallow()],
-        create: [],
+        create: [Permit('cleaner', 'admin'), CheckRequestAlreadyExist()],
         update: [disallow()],
         patch: [iff(IsUser('cleaner', 'driver'), setCreatedByQuery('worker'))],
         remove: [Permit('admin'), patchDeleted()],
