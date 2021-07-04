@@ -8,6 +8,7 @@ export default function (app) {
     const options = {
         Model: createModel(app),
         paginate: app.get('paginate'),
+        whitelist: ['$populate'],
     };
 
     // Initialize our service with any options it requires
