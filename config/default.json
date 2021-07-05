@@ -29,6 +29,7 @@
     }
   },
   "mongodb": "MONGO_URL",
+  "location_fetch": "LOCATIONIQ",
   "CREDENTIALS_PATH": "GOOGLE_APPLICATION_CREDENTIALS",
   "mail": "MAIL_ID",
   "redis": {

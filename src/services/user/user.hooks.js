@@ -16,7 +16,8 @@ import search from 'feathers-mongodb-fuzzy-search';
 import generateCode from '../../utils/generateCode';
 import HasDataExists from '../../utils/HasDataExists';
 import SetCurrentTime from '../../hooks/SetCurrentTime';
-import CheckNullQuery from "../../hooks/CheckNullQuery";
+import CheckNullQuery from '../../hooks/CheckNullQuery';
+import GetAddresses from './hooks/GetAddresses';
 
 const { authenticate } = feathersAuth.hooks;
 const { hashPassword, protect } = local.hooks;
@@ -66,7 +67,7 @@ export default {
 
     after: {
         all: [protect('password')],
-        find: [],
+        find: [GetAddresses()],
         get: [],
         create: [],
         update: [],
