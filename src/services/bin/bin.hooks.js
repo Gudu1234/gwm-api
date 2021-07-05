@@ -12,6 +12,7 @@ import search from 'feathers-mongodb-fuzzy-search';
 import CheckNullQuery from '../../hooks/CheckNullQuery';
 import HasDataExists from '../../utils/HasDataExists';
 import SetCurrentTime from '../../hooks/SetCurrentTime';
+import GetBinAddress from './hooks/GetBinAddress';
 
 const { authenticate } = feathersAuthentication.hooks;
 
@@ -49,7 +50,7 @@ export default {
     after: {
         all: [],
         find: [],
-        get: [],
+        get: [GetBinAddress()],
         create: [],
         update: [],
         patch: [],
