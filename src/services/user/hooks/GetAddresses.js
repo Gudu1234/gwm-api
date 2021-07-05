@@ -25,12 +25,12 @@ const GetAddresses = () => async (context) => {
                 headers: {},
             };
             // eslint-disable-next-line no-unused-vars
-            const { data } = await axios(config).catch((e) => {
-                // console.log(e);
+            const res = await axios(config).catch((e) => {
+                console.log(e);
                 return null;
             });
 
-            each.currentAddress = data ? data.display_name : 'Wrong Coordinates';
+            each.currentAddress = res ? res.data.display_name : 'Wrong Coordinates';
         }
     }
 };
