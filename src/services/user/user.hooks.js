@@ -67,7 +67,7 @@ export default {
 
     after: {
         all: [protect('password')],
-        find: [GetAddresses()],
+        find: [],
         get: [],
         create: [],
         update: [],
