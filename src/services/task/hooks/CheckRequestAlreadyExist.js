@@ -31,7 +31,7 @@ const CheckRequestAlreadyExist = () => async (context) => {
 
         const parentBinId = binData._id;
         const worker = binData.worker;
-        const date = moment(new Date()).add(1, 'day').toDate();
+        const date = user.role === 1 ? moment(new Date()).add(1, 'day').toDate() : moment().toDate();
 
         const requestExists = await app
             .service('task')
