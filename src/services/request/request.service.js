@@ -4,6 +4,7 @@ import { Request } from './request.class';
 import createModel from '../../models/request.model';
 import hooks from './request.hooks';
 import OnRequestCreated from './events/OnRequestCreated';
+import OnRequestCreatedUpdatedDashboard from './events/OnRequestCreatedUpdatedDashboard';
 
 export default function (app) {
     const options = {
@@ -21,5 +22,7 @@ export default function (app) {
     service.hooks(hooks);
 
     service.on('created', OnRequestCreated);
+    service.on('created', OnRequestCreatedUpdatedDashboard);
     service.on('patched', OnRequestCreated);
+    service.on('patched', OnRequestCreatedUpdatedDashboard);
 }

@@ -28,7 +28,7 @@ export default {
         ],
         get: [],
         create: [
-            FRequired(['name', 'phone', 'email', 'pinCode', 'mc', 'address', 'street', 'landmark', 'message']),
+            FRequired(['name', 'phone', 'email', 'pinCode', 'mc', 'address', 'street', 'landmark']),
             GetZoneFromPin(),
             generateCode('request', 'reqId', 6, 'REQ'),
         ],

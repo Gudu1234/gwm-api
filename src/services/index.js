@@ -13,6 +13,7 @@ import otpSend from './otp-send/otp-send.service';
 import task from './task/task.service';
 
 import custom from './custom/custom.service';
+import dashboard from './dashboard/dashboard.service';
 
 // eslint-disable-next-line no-unused-vars
 export default function (app) {
@@ -31,4 +32,5 @@ export default function (app) {
     app.configure(task);
 
     app.configure(custom);
+    app.configure(dashboard);
 }

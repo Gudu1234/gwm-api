@@ -56,7 +56,6 @@ export default function (app) {
             },
             message: {
                 type: String,
-                required: true,
             },
             status: {
                 type: Number,

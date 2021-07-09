@@ -6,18 +6,7 @@ export const Custom = class Custom {
     }
 
     async create(data, params) {
-        const binService = this.app.service('bin');
-        const bins = await binService._find({
-            query: {
-                worker: { $ne: null },
-            },
-            paginate: false,
-        });
-        for (const bin of bins) {
-            await binService._patch(bin._id, {
-                workerAssignedOn: bin.createdAt,
-            });
-        }
+        await this.app.service('dashboard')._create();
 
         return {
             message: 'success',

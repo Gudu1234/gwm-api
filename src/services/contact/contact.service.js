@@ -4,6 +4,7 @@ import { Contact } from './contact.class';
 import createModel from '../../models/contact.model';
 import hooks from './contact.hooks';
 import OnComplaintResolved from './events/OnComplaintResolved';
+import OnComplaintGivenUpdatedDashboard from './events/OnComplaintGivenUpdatedDashboard';
 
 export default function (app) {
     const options = {
@@ -20,5 +21,7 @@ export default function (app) {
 
     service.hooks(hooks);
 
+    service.on('created', OnComplaintGivenUpdatedDashboard);
+    service.on('patched', OnComplaintGivenUpdatedDashboard);
     service.on('patched', OnComplaintResolved);
 }
