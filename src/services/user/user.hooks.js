@@ -17,7 +17,7 @@ import generateCode from '../../utils/generateCode';
 import HasDataExists from '../../utils/HasDataExists';
 import SetCurrentTime from '../../hooks/SetCurrentTime';
 import CheckNullQuery from '../../hooks/CheckNullQuery';
-import GetAddresses from './hooks/GetAddresses';
+import GetCurrentUserDetails from './hooks/GetCurrentUserDetails';
 
 const { authenticate } = feathersAuth.hooks;
 const { hashPassword, protect } = local.hooks;
@@ -57,6 +57,7 @@ export default {
         patch: [
             hashPassword('password'),
             authenticate('jwt'),
+            GetCurrentUserDetails(),
             discard('role'),
             iff(IsUser('cleaner', 'driver'), setId(), discard('zone', 'status', 'userStatus', 'userWorkType')),
             iff(IsUser('admin'), CheckForUser()),

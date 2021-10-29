@@ -15,6 +15,8 @@ import task from './task/task.service';
 import custom from './custom/custom.service';
 import dashboard from './dashboard/dashboard.service';
 
+import zoneUser from './zone-user/zone-user.service';
+
 // eslint-disable-next-line no-unused-vars
 export default function (app) {
     app.configure(user);
@@ -33,4 +35,6 @@ export default function (app) {
 
     app.configure(custom);
     app.configure(dashboard);
+
+    app.configure(zoneUser);
 }
